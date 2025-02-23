@@ -46,6 +46,10 @@ This project is a Node.js REST API for managing events and users. It allows user
 The project structure is as follows:
 
 ```
+
+```
+
+```
 event-management-api/
 ├── controllers/
 │   ├── events-controller.js
@@ -57,12 +61,18 @@ event-management-api/
 │   ├── events.js
 │   └── users.js
 ├── util/
-│   └── auth.js
+│   ├── auth.js
+│   └── upload.js
+├── config.js
+├── database.js
+├── test-api.js
 ├── .env
 ├── app.js
 ├── package.json
 └── README.md
 ```
+
+````
 
 ### Explanation of Each File
 
@@ -84,6 +94,13 @@ event-management-api/
 - **util/**: Contains utility functions.
 
   - `auth.js`: Middleware for JWT authentication.
+  - `upload.js`: Handles file uploads.
+
+- **config.js**: Configuration settings for the application.
+
+- **database.js**: Database connection and setup.
+
+- **test-api.js**: Script for testing the API endpoints.
 
 - **.env**: Environment variables configuration file.
 
@@ -108,7 +125,7 @@ event-management-api/
     "email": "test@example.com",
     "password": "password123"
   }
-  ```
+````
 
 - **Login a user**
 
