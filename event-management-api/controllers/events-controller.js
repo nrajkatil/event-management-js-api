@@ -1,5 +1,8 @@
 // Handles event-related operations
 
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 const { createEvent, getEventById, getAllEvents, updateEvent, deleteEvent } = require('../models/event');
 
 /**
@@ -8,9 +11,25 @@ const { createEvent, getEventById, getAllEvents, updateEvent, deleteEvent } = re
  * @param {Object} res - The response object.
  */
 const create = async (req, res) => {
-    const { title, description, address, date, image } = req.body;
-    const event = await createEvent(title, description, address, date, image);
-    res.status(201).json(event);
+    const { title, description, address, date } = req.body;
+    const image = req.file ? req.file.path : null;
+
+    // Log the request body and file
+    console.log('Request Body:', req.body);
+    console.log('Uploaded File:', req.file);
+
+    // Validate required fields
+    if (!title || !description || !address || !date) {
+        return res.status(400).json({ message: 'Title, description, address, and date are required' });
+    }
+
+    try {
+        const event = await createEvent(title, description, address, date, image);
+        res.status(201).json(event);
+    } catch (error) {
+        console.error('Error creating event:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 };
 
 /**

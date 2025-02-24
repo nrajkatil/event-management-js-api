@@ -21,7 +21,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/events', eventRoutes);
+app.use('/api', eventRoutes);
 
 // Root route
 app.get('/', (req, res) => {
