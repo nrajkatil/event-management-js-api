@@ -1,4 +1,3 @@
-````markdown
 # Event Management API
 
 This project is a Node.js REST API for managing events and users. It allows users to create, read, update, and delete events, as well as register and authenticate users. The API uses MySQL as the database and includes JWT-based authentication.
@@ -17,7 +16,6 @@ This project is a Node.js REST API for managing events and users. It allows user
    git clone https://github.com/your-username/event-management-api.git
    cd event-management-api
    ```
-````
 
 2. Install the dependencies:
 
@@ -76,39 +74,39 @@ event-management-api/
 
 ### Explanation of Each File
 
-- **controllers/**: Contains the logic for handling requests and responses.
+1 **controllers/**: Contains the logic for handling requests and responses.
 
   - `events-controller.js`: Handles event-related operations.
   - `users-controller.js`: Handles user-related operations.
 
-- **models/**: Contains the database models.
+2 **models/**: Contains the database models.
 
   - `event.js`: Defines the Event model and database interactions.
   - `user.js`: Defines the User model and database interactions.
 
-- **routes/**: Contains the route definitions.
+3 **routes/**: Contains the route definitions.
 
   - `events.js`: Defines routes for event-related operations.
   - `users.js`: Defines routes for user-related operations.
 
-- **util/**: Contains utility functions.
+4 **util/**: Contains utility functions.
 
   - `auth.js`: Middleware for JWT authentication.
   - `upload.js`: Handles file uploads.
 
-- **config.js**: Configuration settings for the application.
+5 **config.js**: Configuration settings for the application.
 
-- **database.js**: Database connection and setup.
+6 **database.js**: Database connection and setup.
 
-- **test-api.js**: Script for testing the API endpoints.
+7 **test-api.js**: Script for testing the API endpoints.
 
-- **.env**: Environment variables configuration file.
+8 **.env**: Environment variables configuration file.
 
-- **app.js**: The main application file that sets up the Express server and routes.
+9 **app.js**: The main application file that sets up the Express server and routes.
 
-- **package.json**: Contains the project metadata and dependencies.
+10 **package.json**: Contains the project metadata and dependencies.
 
-- **README.md**: Project documentation.
+11 **README.md**: Project documentation.
 
 ## API Endpoints
 
