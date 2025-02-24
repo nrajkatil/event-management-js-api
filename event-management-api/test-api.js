@@ -1,4 +1,7 @@
 const axios = require('axios');
+const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path');
 
 const testApi = async () => {
     try {
@@ -35,35 +38,31 @@ const testApi = async () => {
         const token2 = response.data.token;
 
         // Create Events for User 1
-        const events = [];
-        for (let i = 1; i <= 3; i++) {
-            response = await axios.post('http://localhost:3000/api/events', {
-                title: `Test Event ${i}`,
-                description: `This is test event ${i}`,
-                address: `123 Test St ${i}`,
-                date: `2025-02-22 10:00:00`,
-                image: `test${i}.jpg`
-            }, {
-                headers: { Authorization: `Bearer ${token1}` }
-            });
-            console.log(`Create Event ${i} for User 1:`, response.data);
-            events.push(response.data.id);
-        }
+        const createEvents = async (token, userId) => {
+            const events = [];
+            for (let i = 1; i <= 3; i++) {
+                const form = new FormData();
+                form.append('title', `Test Event ${i}`);
+                form.append('description', `This is test event ${i}`);
+                form.append('address', `123 Test St ${i}`);
+                form.append('date', `2025-02-22 10:00:00`);
+                form.append('image', fs.createReadStream(path.join(__dirname, 'test-image.jpg')));
 
-        // Create Events for User 2
-        for (let i = 4; i <= 6; i++) {
-            response = await axios.post('http://localhost:3000/api/events', {
-                title: `Test Event ${i}`,
-                description: `This is test event ${i}`,
-                address: `123 Test St ${i}`,
-                date: `2025-02-22 10:00:00`,
-                image: `test${i}.jpg`
-            }, {
-                headers: { Authorization: `Bearer ${token2}` }
-            });
-            console.log(`Create Event ${i} for User 2:`, response.data);
-            events.push(response.data.id);
-        }
+                const response = await axios.post('http://localhost:3000/api/events', form, {
+                    headers: {
+                        ...form.getHeaders(),
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(`Create Event ${i} for User ${userId}:`, response.data);
+                events.push(response.data.id);
+            }
+            return events;
+        };
+
+        const events1 = await createEvents(token1, 1);
+        const events2 = await createEvents(token2, 2);
+        const events = [...events1, ...events2];
 
         // Get Event by ID
         for (const eventId of events) {
