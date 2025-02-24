@@ -223,6 +223,62 @@ You can run the provided `test-api.js` script to test the API endpoints. The scr
 - Updating a non-existent event
 - Deleting a non-existent event
 
+### Use Case 1: User Signup
+
+1. **Client Request**: A client sends a POST request to the server at `/api/users/signup` with user details (username, email, password).
+2. **Router**: The request is routed to the appropriate route handler in `routes/users.js`.
+3. **Controller**: The route handler calls the `signup` function in `controllers/users-controller.js`.
+4. **Model**: The `signup` function interacts with the `User` model in `models/user.js` to save the new user to the database.
+5. **Database**: The `User` model uses Sequelize to interact with the MySQL database and save the user.
+6. **Response**: The controller sends a response back to the client with a success message or an error message.
+
+### Use Case 2: User Login
+
+1. **Client Request**: A client sends a POST request to the server at `/api/users/login` with user credentials (email, password).
+2. **Router**: The request is routed to the appropriate route handler in `routes/users.js`.
+3. **Controller**: The route handler calls the `login` function in `controllers/users-controller.js`.
+4. **Model**: The `login` function interacts with the `User` model in `models/user.js` to find the user and verify the password.
+5. **Database**: The `User` model uses Sequelize to interact with the MySQL database and find the user.
+6. **Response**: The controller sends a response back to the client with a success message and a token or an error message.
+
+### Use Case 3: Create Event
+
+1. **Client Request**: A client sends a POST request to the server at `/api/events` with event details (title, description, address, date, image).
+2. **Router**: The request is routed to the appropriate route handler in `routes/events.js`.
+3. **Controller**: The route handler calls the `createEvent` function in `controllers/events-controller.js`.
+4. **Model**: The `createEvent` function interacts with the `Event` model in `models/event.js` to save the new event to the database.
+5. **Database**: The `Event` model uses Sequelize to interact with the MySQL database and save the event.
+6. **Response**: The controller sends a response back to the client with a success message or an error message.
+
+### Use Case 4: Get Event by ID
+
+1. **Client Request**: A client sends a GET request to the server at `/api/events/:id` with the event ID.
+2. **Router**: The request is routed to the appropriate route handler in `routes/events.js`.
+3. **Controller**: The route handler calls the `getEventById` function in `controllers/events-controller.js`.
+4. **Model**: The `getEventById` function interacts with the `Event` model in `models/event.js` to find the event by ID.
+5. **Database**: The `Event` model uses Sequelize to interact with the MySQL database and find the event.
+6. **Response**: The controller sends a response back to the client with the event details or an error message.
+
+### Use Case 5: Update Event
+
+1. **Client Request**: A client sends a PUT request to the server at `/api/events/:id` with updated event details (title, description, address, date, image).
+2. **Router**: The request is routed to the appropriate route handler in `routes/events.js`.
+3. **Controller**: The route handler calls the `updateEvent` function in `controllers/events-controller.js`.
+4. **Model**: The `updateEvent` function interacts with the `Event` model in `models/event.js` to update the event in the database.
+5. **Database**: The `Event` model uses Sequelize to interact with the MySQL database and update the event.
+6. **Response**: The controller sends a response back to the client with a success message or an error message.
+
+### Use Case 6: Delete Event
+
+1. **Client Request**: A client sends a DELETE request to the server at `/api/events/:id` with the event ID.
+2. **Router**: The request is routed to the appropriate route handler in `routes/events.js`.
+3. **Controller**: The route handler calls the `deleteEvent` function in `controllers/events-controller.js`.
+4. **Model**: The `deleteEvent` function interacts with the `Event` model in `models/event.js` to delete the event from the database.
+5. **Database**: The `Event` model uses Sequelize to interact with the MySQL database and delete the event.
+6. **Response**: The controller sends a response back to the client with a success message or an error message.
+
+This flow ensures a clear separation of concerns, making the codebase easier to maintain and extend.
+
 ## License
 
 This project is licensed under the MIT License.
